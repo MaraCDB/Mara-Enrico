@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mara & Enrico — 26 Settembre 2026</title>
+<meta name="description" content="Partecipazione di nozze di Mara & Enrico — 26 settembre 2026, Ristorante Zurigo, Mori (TN)" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+/* ── Reset & Base ─────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --green:#6b8f71;
+  --green-dark:#4a6b50;
+  --green-light:#e8f0e9;
+  --cream:#faf9f6;
+  --cream-dark:#f0eeea;
+  --text:#3a3a3a;
+  --text-light:#6a6a6a;
+  --gold:#c4a265;
+  --radius:10px;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Montserrat',sans-serif;
+  font-weight:300;
+  color:var(--text);
+  background:var(--cream);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{max-width:100%;display:block}
+
+/* ── Typography ───────────────────────────────── */
+.serif{font-family:'Cormorant Garamond',serif}
+
+h1,h2,h3{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;
+  color:var(--green-dark);
+}
+
+h1{font-size:clamp(3rem,8vw,5.5rem);line-height:1.1}
+h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:1rem}
+h3{font-size:1.4rem}
+
+/* ── Header / Nav ─────────────────────────────── */
+header{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  background:rgba(107,143,113,.95);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:box-shadow .3s;
+}
+
+header.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.15)}
+
+nav{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;
+  font-weight:400;
+  color:#fff;
+  letter-spacing:2px;
+}
+
+.nav-links{display:flex;gap:24px;align-items:center}
+
+.nav-links a{
+  color:rgba(255,255,255,.9);
+  text-decoration:none;
+  font-size:.85rem;
+  font-weight:400;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  transition:color .2s;
+}
+
+.nav-links a:hover{color:#fff}
+
+/* Hamburger */
+.hamburger{
+  display:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:4px;
+}
+
+.hamburger span{
+  display:block;
+  width:24px;height:2px;
+  background:#fff;
+  margin:5px 0;
+  transition:transform .3s,opacity .3s;
+}
+
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ── Mobile Nav ───────────────────────────────── */
+@media(max-width:768px){
+  .hamburger{display:block}
+
+  .nav-links{
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    background:rgba(74,107,80,.97);
+    flex-direction:column;
+    justify-content:center;
+    gap:32px;
+    transform:translateY(-100%);
+    transition:transform .4s cubic-bezier(.4,0,.2,1);
+    z-index:99;
+  }
+
+  .nav-links.open{transform:translateY(0)}
+
+  .nav-links a{
+    font-size:1.2rem;
+    letter-spacing:2px;
+  }
+}
+
+/* ── Hero Section ─────────────────────────────── */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:120px 24px 80px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse at 50% 30%,var(--green-light) 0%,transparent 70%);
+  opacity:.5;
+  pointer-events:none;
+}
+
+.hero-content{position:relative;z-index:1;max-width:600px}
+
+.hero-date{
+  font-family:'Montserrat',sans-serif;
+  font-weight:500;
+  font-size:.9rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:16px;
+}
+
+.hero h1{margin-bottom:24px}
+
+.hero-ampersand{
+  display:block;
+  font-size:.5em;
+  color:var(--gold);
+  margin:4px 0;
+}
+
+.hero-subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.1rem,3vw,1.4rem);
+  font-style:italic;
+  color:var(--text-light);
+  margin-bottom:8px;
+}
+
+.hero-place{
+  font-size:.95rem;
+  color:var(--text-light);
+  margin-bottom:32px;
+}
+
+.hero-photo{
+  width:min(280px,70vw);
+  height:min(280px,70vw);
+  border-radius:50%;
+  object-fit:cover;
+  border:5px solid #fff;
+  box-shadow:0 8px 40px rgba(0,0,0,.1);
+  margin:0 auto 40px;
+}
+
+/* ── Decorative divider ───────────────────────── */
+.divider{
+  width:60px;height:1px;
+  background:var(--gold);
+  margin:0 auto 24px;
+}
+
+/* ── Sections ─────────────────────────────────── */
+.section{
+  padding:80px 24px;
+  max-width:800px;
+  margin:auto;
+  text-align:center;
+}
+
+.section-alt{
+  background:var(--green-light);
+}
+
+.section p{
+  max-width:560px;
+  margin:0 auto 16px;
+  color:var(--text-light);
+}
+
+/* ── Countdown ────────────────────────────────── */
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:clamp(16px,5vw,40px);
+  margin:40px 0;
+  flex-wrap:wrap;
+}
+
+.countdown-item{text-align:center}
+
+.countdown-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,7vw,4rem);
+  font-weight:300;
+  color:var(--green-dark);
+  line-height:1;
+}
+
+.countdown-label{
+  font-size:.75rem;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:var(--text-light);
+  margin-top:4px;
+}
+
+/* ── Story ────────────────────────────────────── */
+.story-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.2rem,3vw,1.6rem);
+  font-style:italic;
+  line-height:1.8;
+  color:var(--text);
+  max-width:520px;
+  margin:24px auto;
+}
+
+/* ── Program ──────────────────────────────────── */
+.timeline{
+  max-width:400px;
+  margin:40px auto;
+  text-align:left;
+  position:relative;
+}
+
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:23px;top:8px;bottom:8px;
+  width:1px;
+  background:var(--gold);
+}
+
+.timeline-item{
+  display:flex;
+  align-items:flex-start;
+  gap:20px;
+  padding:16px 0;
+  position:relative;
+}
+
+.timeline-dot{
+  width:10px;height:10px;
+  min-width:10px;
+  border-radius:50%;
+  background:var(--gold);
+  margin-top:6px;
+  position:relative;
+  left:19px;
+  z-index:1;
+}
+
+.timeline-time{
+  min-width:50px;
+  font-weight:500;
+  color:var(--green-dark);
+  font-size:.95rem;
+}
+
+.timeline-desc{
+  font-size:.95rem;
+  color:var(--text-light);
+}
+
+/* ── Location ─────────────────────────────────── */
+.map-container{
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin:30px auto;
+  max-width:600px;
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+}
+
+.map-container iframe{
+  width:100%;
+  height:350px;
+  border:0;
+}
+
+.location-card{
+  background:#fff;
+  padding:24px;
+  border-radius:var(--radius);
+  box-shadow:0 2px 16px rgba(0,0,0,.06);
+  max-width:500px;
+  margin:24px auto;
+}
+
+.location-card strong{color:var(--green-dark)}
+
+/* ── RSVP ─────────────────────────────────────── */
+.rsvp-form{
+  max-width:420px;
+  margin:30px auto;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  text-align:left;
+}
+
+.rsvp-form label{
+  font-size:.8rem;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--text-light);
+  margin-bottom:-8px;
+}
+
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea{
+  padding:14px 16px;
+  border:1px solid #ddd;
+  border-radius:var(--radius);
+  font-family:inherit;
+  font-size:.95rem;
+  background:#fff;
+  transition:border-color .2s;
+  width:100%;
+}
+
+.rsvp-form input:focus,
+.rsvp-form select:focus,
+.rsvp-form textarea:focus{
+  outline:none;
+  border-color:var(--green);
+}
+
+.rsvp-form textarea{resize:vertical;min-height:100px}
+
+/* ── Buttons ──────────────────────────────────── */
+.btn{
+  display:inline-block;
+  padding:16px 36px;
+  background:var(--green);
+  color:#fff;
+  border:none;
+  border-radius:var(--radius);
+  font-family:inherit;
+  font-size:.9rem;
+  font-weight:500;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer;
+  transition:background .2s,transform .1s;
+  text-align:center;
+}
+
+.btn:hover{background:var(--green-dark)}
+.btn:active{transform:scale(.98)}
+
+.btn-outline{
+  background:transparent;
+  border:1.5px solid var(--green);
+  color:var(--green);
+}
+
+.btn-outline:hover{
+  background:var(--green);
+  color:#fff;
+}
+
+/* ── Foto ─────────────────────────────────────── */
+.foto-icon{
+  font-size:3rem;
+  margin-bottom:16px;
+}
+
+/* ── Footer ───────────────────────────────────── */
+footer{
+  background:var(--green);
+  color:rgba(255,255,255,.9);
+  text-align:center;
+  padding:60px 24px;
+}
+
+footer .footer-names{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;
+  font-weight:300;
+  margin-bottom:8px;
+}
+
+footer .footer-date{
+  font-size:.85rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  opacity:.7;
+}
+
+/* ── Scroll Animations ────────────────────────── */
+.fade-in{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+
+.fade-in.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ── RSVP Feedback ────────────────────────────── */
+.rsvp-success{
+  display:none;
+  padding:24px;
+  background:var(--green-light);
+  border-radius:var(--radius);
+  text-align:center;
+  max-width:420px;
+  margin:30px auto;
+}
+
+.rsvp-success h3{margin-bottom:8px;color:var(--green-dark)}
+
+/* ── Upload Area ──────────────────────────────── */
+.upload-area{
+  max-width:500px;
+  margin:30px auto;
+}
+
+.upload-dropzone{
+  border:2px dashed var(--green);
+  border-radius:var(--radius);
+  padding:40px 24px;
+  text-align:center;
+  transition:background .2s,border-color .2s;
+  cursor:pointer;
+}
+
+.upload-dropzone.dragover{
+  background:var(--green-light);
+  border-color:var(--green-dark);
+}
+
+.upload-dropzone-text{
+  color:var(--text-light);
+  margin-bottom:16px;
+  font-size:.95rem;
+}
+
+.upload-dropzone-text span{
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.upload-name-row{margin-top:12px}
+
+.upload-name-input{
+  width:100%;
+  padding:12px 16px;
+  border:1px solid #ddd;
+  border-radius:var(--radius);
+  font-family:inherit;
+  font-size:.9rem;
+  background:#fff;
+}
+
+.upload-name-input:focus{
+  outline:none;
+  border-color:var(--green);
+}
+
+.upload-progress{
+  margin-top:12px;
+  background:#e0e0e0;
+  border-radius:20px;
+  height:24px;
+  position:relative;
+  overflow:hidden;
+}
+
+.upload-progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--green);
+  border-radius:20px;
+  transition:width .3s;
+}
+
+.upload-progress-text{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-size:.75rem;
+  font-weight:500;
+  color:var(--text);
+}
+
+.upload-status{
+  margin-top:8px;
+  font-size:.85rem;
+  color:var(--green-dark);
+  min-height:20px;
+}
+
+/* ── Gallery Grid ────────────────────────────── */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:8px;
+  margin-top:40px;
+}
+
+@media(min-width:768px){
+  .gallery-grid{
+    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:12px;
+  }
+}
+
+.gallery-item{
+  position:relative;
+  border-radius:6px;
+  overflow:hidden;
+  cursor:pointer;
+  aspect-ratio:1;
+  background:var(--cream-dark);
+}
+
+.gallery-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .3s;
+}
+
+.gallery-item:hover img{transform:scale(1.05)}
+
+.gallery-item-name{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:6px 8px;
+  background:linear-gradient(transparent,rgba(0,0,0,.5));
+  color:#fff;
+  font-size:.7rem;
+  letter-spacing:.5px;
+}
+
+.gallery-empty{
+  grid-column:1/-1;
+  color:var(--text-light);
+  font-style:italic;
+  padding:20px;
+}
+
+/* ── Lightbox ────────────────────────────────── */
+.lightbox{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.92);
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:20px;
+}
+
+.lightbox-close{
+  position:absolute;
+  top:16px;right:20px;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:2.5rem;
+  cursor:pointer;
+  z-index:201;
+  line-height:1;
+}
+
+.lightbox-img{
+  max-width:90vw;
+  max-height:80vh;
+  object-fit:contain;
+  border-radius:4px;
+}
+
+.lightbox-caption{
+  color:rgba(255,255,255,.7);
+  font-size:.85rem;
+  margin-top:12px;
+}
+
+/* ── Utilities ────────────────────────────────── */
+.mt-1{margin-top:8px}
+.mt-2{margin-top:16px}
+.mt-3{margin-top:24px}
+.mt-4{margin-top:40px}
+</style>
+</head>
+
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header id="header">
+  <nav>
+    <div class="nav-logo">M & E</div>
+
+    <button class="hamburger" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#storia" onclick="closeMenu()">La nostra storia</a>
+      <a href="#programma" onclick="closeMenu()">Programma</a>
+      <a href="#luogo" onclick="closeMenu()">Come arrivare</a>
+      <a href="#rsvp" onclick="closeMenu()">Conferma</a>
+      <a href="#foto" onclick="closeMenu()">Foto</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="top">
+  <div class="hero-content">
+
+    <img
+      src="foto.jpg"
+      alt="Mara e Enrico"
+      class="hero-photo"
+      onerror="this.style.background='var(--green-light)';this.alt='📷'"
+    />
+
+    <div class="hero-date">26 Settembre 2026</div>
+
+    <h1>
+      Mara
+      <span class="hero-ampersand">&</span>
+      Enrico
+    </h1>
+
+    <p class="hero-subtitle">Ci sposiamo!</p>
+    <p class="hero-place">Brentonico — Trento</p>
+
+    <div class="countdown" id="countdown">
+      <div class="countdown-item">
+        <div class="countdown-num" id="cd-days">---</div>
+        <div class="countdown-label">Giorni</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-num" id="cd-hours">--</div>
+        <div class="countdown-label">Ore</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-num" id="cd-mins">--</div>
+        <div class="countdown-label">Minuti</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-num" id="cd-secs">--</div>
+        <div class="countdown-label">Secondi</div>
+      </div>
+    </div>
+
+    <a class="btn" href="#rsvp">Conferma presenza</a>
+
+  </div>
+</section>
+
+<!-- ═══════════════ LA NOSTRA STORIA ═══════════════ -->
+<section class="section section-alt" id="storia">
+  <div class="fade-in">
+    <div class="divider"></div>
+    <h2>La nostra storia</h2>
+
+    <p class="story-text">
+      Ci abbiamo pensato per 10 anni, 3 case, 2 figli...<br>
+      abbiamo deciso di fare anche questo passo!    </p>
+
+    <p class="story-text">
+      Venite a festeggiare con noi il nostro matrimonio —
+e anche i 40 anni di Mara, perché due occasioni così meritano una grande festa.
+    </p>
+    <p class="story-text">
+      Vogliamo condividere questa giornata<br> con le persone che amiamo.<br> <b>Voi siete tra queste.</b>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ COME ARRIVARE ═══════════════ -->
+<section class="section section-alt" id="luogo">
+  <div class="fade-in">
+    <div class="divider"></div>
+    <h2>Come arrivare</h2>
+
+    <div class="location-card">
+      <h3>Ristorante Zurigo</h3>
+      <p class="mt-1">Mori (TN)</p>
+      <p class="mt-2" style="font-size:.9rem;color:var(--text-light)">
+        Uscita autostradale <strong>Rovereto Sud</strong> — A22 del Brennero
+      </p>
+    </div>
+
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps?q=Ristorante+Zurigo+Mori&output=embed"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+
+    <a
+      class="btn btn-outline mt-2"
+      href="https://www.google.com/maps/dir/?api=1&destination=Ristorante+Zurigo+Mori"
+      target="_blank"
+      rel="noopener"
+    >
+      Apri navigatore
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════ PROGRAMMA ═══════════════ -->
+<section class="section" id="programma">
+  <div class="fade-in">
+    <div class="divider"></div>
+    <h2>Il programma</h2>
+
+    <p>Ecco come si svolgerà la giornata.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">11:30</div>
+        <div class="timeline-desc">Aperitivo di benvenuto</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">12:00</div>
+        <div class="timeline-desc">Cerimonia</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">12:30</div>
+        <div class="timeline-desc">Pranzo</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">15:30</div>
+        <div class="timeline-desc">Torta e festeggiamenti</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════ RSVP ═══════════════ -->
+<section class="section" id="rsvp">
+  <div class="fade-in">
+    <div class="divider"></div>
+    <h2>Ci sarete?</h2>
+
+    <p>
+      Confermate la vostra presenza entro il <strong>30 giugno 2026</strong>.
+    </p>
+
+    <form class="rsvp-form" id="rsvpForm" onsubmit="handleRsvp(event)">
+      <label for="nome">Nome</label>
+      <input id="nome" type="text" placeholder="Il tuo nome" required />
+
+      <label for="cognome">Cognome</label>
+      <input id="cognome" type="text" placeholder="Il tuo cognome" required />
+
+      <label for="ospiti">Numero ospiti</label>
+      <select id="ospiti">
+        <option value="1">1 persona</option>
+        <option value="2">2 persone</option>
+        <option value="3">3 persone</option>
+        <option value="4">4 persone</option>
+        <option value="5">5 persone</option>
+      </select>
+
+      <label for="partecipa">Conferma</label>
+      <select id="partecipa">
+        <option value="si">Ci sarò!</option>
+        <option value="no">Purtroppo non riesco</option>
+      </select>
+
+      <label for="allergie">Allergie o intolleranze</label>
+      <input id="allergie" type="text" placeholder="Indicale qui (facoltativo)" />
+
+      <label for="messaggio">Messaggio</label>
+      <textarea id="messaggio" placeholder="Un pensiero per gli sposi (facoltativo)"></textarea>
+
+      <button type="submit" class="btn mt-2">Invia conferma</button>
+    </form>
+
+    <div class="rsvp-success" id="rsvpSuccess">
+      <h3>Grazie!</h3>
+      <p>La tua conferma è stata ricevuta. Non vediamo l'ora di festeggiare insieme!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOTO ═══════════════ -->
+<section class="section section-alt" id="foto">
+  <div class="fade-in">
+    <div class="divider"></div>
+    <h2>Le vostre foto</h2>
+
+    <div class="foto-icon">📸</div>
+
+    <p>
+      Durante la giornata scatterete sicuramente tante foto e video.<br>
+      Se vi va, caricateli qui: ci aiuterete a raccogliere tutti i ricordi della festa.
+    </p>
+
+    <!-- Upload UI -->
+    <div class="upload-area">
+      <div class="upload-dropzone" id="dropzone">
+        <p class="upload-dropzone-text">Trascina le foto qui<br><span>oppure</span></p>
+        <label class="btn btn-outline" style="cursor:pointer">
+          Scegli foto
+          <input type="file" id="fileInput" accept="image/*" multiple hidden />
+        </label>
+      </div>
+      <div class="upload-name-row">
+        <input type="text" id="uploaderName" placeholder="Il tuo nome (facoltativo)" class="upload-name-input" />
+      </div>
+      <div class="upload-progress" id="uploadProgress" style="display:none">
+        <div class="upload-progress-bar" id="uploadProgressBar"></div>
+        <span class="upload-progress-text" id="uploadProgressText">0%</span>
+      </div>
+      <div class="upload-status" id="uploadStatus"></div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <button class="btn btn-outline mt-3" id="loadMoreBtn" style="display:none">Carica altre foto</button>
+  </div>
+</section>
+
+<!-- ═══════════════ LIGHTBOX ═══════════════ -->
+<div class="lightbox" id="lightbox" style="display:none">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <img class="lightbox-img" id="lightboxImg" alt="" />
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-names serif">Mara & Enrico</div>
+  <div class="footer-date">26 settembre 2026</div>
+</footer>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+/* ── Hamburger Menu ─────────────────────── */
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+
+function closeMenu() {
+  menuToggle.classList.remove('open');
+  navLinks.classList.remove('open');
+}
+
+/* ── Header shadow on scroll ────────────── */
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+/* ── Countdown ──────────────────────────── */
+function updateCountdown() {
+  const wedding = new Date('2026-09-26T11:30:00+02:00');
+  const now = new Date();
+  const diff = wedding - now;
+
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML =
+      '<p class="hero-subtitle">Oggi è il grande giorno!</p>';
+    return;
+  }
+
+  const days  = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins  = Math.floor((diff % 3600000) / 60000);
+  const secs  = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById('cd-days').textContent  = days;
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cd-mins').textContent  = String(mins).padStart(2, '0');
+  document.getElementById('cd-secs').textContent  = String(secs).padStart(2, '0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* ── Scroll fade-in ─────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+/* ── RSVP Form → Google Sheets ────────────── */
+/* TODO: sostituisci con l'URL del tuo Apps Script deployment */
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz_i_ELX1lU7Fc_k55SZ-M0m9UuTz4o4DiRWz7Vvcxk8fZWo4LHR0h_zmTwPl3RS_Mf/exec';
+
+function handleRsvp(e) {
+  e.preventDefault();
+
+  const form    = document.getElementById('rsvpForm');
+  const success = document.getElementById('rsvpSuccess');
+  const btn     = form.querySelector('button[type="submit"]');
+
+  const data = {
+    nome:       document.getElementById('nome').value.trim(),
+    cognome:    document.getElementById('cognome').value.trim(),
+    ospiti:     document.getElementById('ospiti').value,
+    partecipa:  document.getElementById('partecipa').value,
+    allergie:   document.getElementById('allergie').value.trim(),
+    messaggio:  document.getElementById('messaggio').value.trim()
+  };
+
+  btn.disabled = true;
+  btn.textContent = 'Invio in corso…';
+
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    form.style.display = 'none';
+    success.style.display = 'block';
+  })
+  .catch(() => {
+    btn.disabled = false;
+    btn.textContent = 'Invia conferma';
+    alert('Si è verificato un errore. Riprova tra poco.');
+  });
+}
+</script>
+
+<!-- ═══════════════ SUPABASE & FOTO ═══════════════ -->
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+const SUPABASE_URL  = 'https://pkzwupxmggjoijituvwm.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrend1cHhtZ2dqb2lqaXR1dndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1OTUzODgsImV4cCI6MjA4OTE3MTM4OH0.P0WGLJVB1fX4odxne09ObNru3TQeVefE3KzqQ9zskz4';
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+/* ── Compressione immagini (Canvas API) ─────── */
+function compressImage(file, maxDim, quality) {
+  return new Promise(resolve => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let { width, height } = img;
+      if (width > maxDim || height > maxDim) {
+        const r = Math.min(maxDim / width, maxDim / height);
+        width  = Math.round(width * r);
+        height = Math.round(height * r);
+      }
+      const c   = document.createElement('canvas');
+      c.width   = width;
+      c.height  = height;
+      c.getContext('2d').drawImage(img, 0, 0, width, height);
+      c.toBlob(blob => resolve({ blob, width, height }), 'image/jpeg', quality);
+    };
+    img.src = url;
+  });
+}
+
+/* ── Elementi DOM ──────────────────────────── */
+const dropzone        = document.getElementById('dropzone');
+const fileInput       = document.getElementById('fileInput');
+const uploadProgress  = document.getElementById('uploadProgress');
+const uploadBar       = document.getElementById('uploadProgressBar');
+const uploadText      = document.getElementById('uploadProgressText');
+const uploadStatus    = document.getElementById('uploadStatus');
+const galleryGrid     = document.getElementById('galleryGrid');
+const loadMoreBtn     = document.getElementById('loadMoreBtn');
+const lightbox        = document.getElementById('lightbox');
+const lightboxImg     = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxClose   = document.getElementById('lightboxClose');
+
+/* ── Drag & Drop ───────────────────────────── */
+dropzone.addEventListener('dragover', e => {
+  e.preventDefault();
+  dropzone.classList.add('dragover');
+});
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('dragover');
+  handleFiles(e.dataTransfer.files);
+});
+
+/* ── File picker ───────────────────────────── */
+fileInput.addEventListener('change', e => {
+  handleFiles(e.target.files);
+  e.target.value = '';
+});
+
+/* ── Upload handler ────────────────────────── */
+async function handleFiles(fileList) {
+  const files = Array.from(fileList).filter(f => f.type.startsWith('image/'));
+  if (!files.length) return;
+
+  const uploaderName = document.getElementById('uploaderName').value.trim() || 'Anonimo';
+  uploadProgress.style.display = 'block';
+  uploadStatus.textContent = '';
+  let done = 0;
+
+  for (const file of files) {
+    try {
+      uploadStatus.textContent = `Caricamento ${done + 1} di ${files.length}…`;
+
+      /* Comprimi: full-size max 1920px, thumbnail 400px */
+      const full  = await compressImage(file, 1920, 0.8);
+      const thumb = await compressImage(file, 400, 0.7);
+
+      const ts   = Date.now();
+      const uid  = Math.random().toString(36).substring(2, 8);
+      const name = `${ts}_${uid}.jpg`;
+
+      /* Upload full-size su Supabase Storage */
+      const { error: fullErr } = await supabase.storage
+        .from('photos')
+        .upload(`full/${name}`, full.blob, { contentType: 'image/jpeg' });
+      if (fullErr) throw fullErr;
+
+      /* Upload thumbnail */
+      const { error: thumbErr } = await supabase.storage
+        .from('photos')
+        .upload(`thumbs/${name}`, thumb.blob, { contentType: 'image/jpeg' });
+      if (thumbErr) throw thumbErr;
+
+      /* URL pubblici */
+      const { data: fullData }  = supabase.storage.from('photos').getPublicUrl(`full/${name}`);
+      const { data: thumbData } = supabase.storage.from('photos').getPublicUrl(`thumbs/${name}`);
+
+      /* Salva metadata nella tabella photos */
+      const { error: dbErr } = await supabase.from('photos').insert({
+        url:        fullData.publicUrl,
+        thumb_url:  thumbData.publicUrl,
+        name:       uploaderName,
+        width:      full.width,
+        height:     full.height
+      });
+      if (dbErr) throw dbErr;
+
+      done++;
+
+      /* Aggiorna progress */
+      const overall = Math.round((done / files.length) * 100);
+      uploadBar.style.width = overall + '%';
+      uploadText.textContent = overall + '%';
+
+    } catch (err) {
+      console.error('Upload error:', err);
+      uploadStatus.textContent = `Errore: ${err.message}`;
+    }
+  }
+
+  uploadBar.style.width = '100%';
+  uploadText.textContent = '100%';
+  uploadStatus.textContent = `${done} foto caricata/e con successo!`;
+
+  setTimeout(() => {
+    uploadProgress.style.display = 'none';
+    uploadBar.style.width = '0%';
+  }, 3000);
+
+  loadGallery(true);
+}
+
+/* ── Galleria ──────────────────────────────── */
+const BATCH = 20;
+let offset    = 0;
+let allPhotos = [];
+
+async function loadGallery(reset = false) {
+  if (reset) {
+    offset = 0;
+    allPhotos = [];
+    galleryGrid.innerHTML = '';
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('photos')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .range(offset, offset + BATCH - 1);
+
+    if (error) throw error;
+
+    if ((!data || data.length === 0) && allPhotos.length === 0) {
+      galleryGrid.innerHTML = '<p class="gallery-empty">Nessuna foto ancora. Sii il primo a caricare!</p>';
+      loadMoreBtn.style.display = 'none';
+      return;
+    }
+
+    data.forEach(photo => {
+      allPhotos.push(photo);
+      appendGalleryItem(photo, allPhotos.length - 1);
+    });
+
+    offset += data.length;
+    loadMoreBtn.style.display = data.length < BATCH ? 'none' : 'inline-block';
+  } catch (err) {
+    console.error('Gallery load error:', err);
+  }
+}
+
+function appendGalleryItem(data, idx) {
+  const div = document.createElement('div');
+  div.className = 'gallery-item';
+  div.innerHTML = `
+    <img src="${data.thumb_url}" alt="Foto di ${data.name}" loading="lazy" />
+    <div class="gallery-item-name">${data.name}</div>
+  `;
+  div.addEventListener('click', () => openLightbox(idx));
+  galleryGrid.appendChild(div);
+}
+
+loadMoreBtn.addEventListener('click', () => loadGallery(false));
+
+/* ── Lightbox ──────────────────────────────── */
+function openLightbox(idx) {
+  const p = allPhotos[idx];
+  lightboxImg.src = p.url;
+  lightboxCaption.textContent = `Foto di ${p.name}`;
+  lightbox.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
+  lightboxImg.src = '';
+  document.body.style.overflow = '';
+}
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+/* ── Caricamento iniziale galleria ─────────── */
+loadGallery();
+</script>
+
+</body>
+</html>
