@@ -49,7 +49,7 @@ h1,h2,h3{
 }
 
 h1{font-size:clamp(3rem,8vw,5.5rem);line-height:1.1}
-h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:1rem}
+h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:.5rem}
 h3{font-size:1.4rem}
 
 /* ── Header / Nav ─────────────────────────────── */
@@ -103,6 +103,8 @@ nav{
   border:none;
   cursor:pointer;
   padding:4px;
+  position:relative;
+  z-index:102;
 }
 
 .hamburger span{
@@ -119,21 +121,27 @@ nav{
 
 /* ── Mobile Nav ───────────────────────────────── */
 @media(max-width:768px){
+  header{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+
   .hamburger{display:block}
 
   .nav-links{
     position:fixed;
     top:0;left:0;right:0;bottom:0;
-    background:rgba(74,107,80,.97);
+    background:rgba(74,107,80,.98);
     flex-direction:column;
     justify-content:center;
     gap:32px;
     transform:translateY(-100%);
     transition:transform .4s cubic-bezier(.4,0,.2,1);
-    z-index:99;
+    z-index:101;
+    visibility:hidden;
   }
 
-  .nav-links.open{transform:translateY(0)}
+  .nav-links.open{transform:translateY(0);visibility:visible}
 
   .nav-links a{
     font-size:1.2rem;
@@ -212,12 +220,12 @@ nav{
 .divider{
   width:60px;height:1px;
   background:var(--gold);
-  margin:0 auto 24px;
+  margin:0 auto 12px;
 }
 
 /* ── Sections ─────────────────────────────────── */
 .section{
-  padding:80px 24px;
+  padding:20px 24px;
   max-width:800px;
   margin:auto;
   text-align:center;
@@ -268,13 +276,13 @@ nav{
   line-height:1.8;
   color:var(--text);
   max-width:520px;
-  margin:24px auto;
+  margin:12px auto;
 }
 
 /* ── Program ──────────────────────────────────── */
 .timeline{
   max-width:400px;
-  margin:40px auto;
+  margin:20px auto;
   text-align:left;
   position:relative;
 }
@@ -724,7 +732,7 @@ footer .footer-date{
 
     <p class="story-text">
       Ci abbiamo pensato per 10 anni, 3 case, 2 figli...<br>
-      abbiamo deciso di fare anche questo passo!    </p>
+      e abbiamo deciso di fare anche questo passo!    </p>
 
     <p class="story-text">
       Venite a festeggiare con noi il nostro matrimonio —
@@ -812,7 +820,9 @@ e anche i 40 anni di Mara, perché due occasioni così meritano una grande festa
     <h2>Ci sarete?</h2>
 
     <p>
-      Confermate la vostra presenza entro il <strong>30 giugno 2026</strong>.
+      Qui puoi <b>confermare se sarai con noi o no al matrimonio</b>. 
+      Dacci risposta il prima possibile per favore: 
+      ci renderai più facile l'organizzazione dei preparativi!
     </p>
 
     <form class="rsvp-form" id="rsvpForm" onsubmit="handleRsvp(event)">
@@ -822,7 +832,7 @@ e anche i 40 anni di Mara, perché due occasioni così meritano una grande festa
       <label for="cognome">Cognome</label>
       <input id="cognome" type="text" placeholder="Il tuo cognome" required />
 
-      <label for="ospiti">Numero ospiti</label>
+      <label for="ospiti">Partecipanti</label>
       <select id="ospiti">
         <option value="1">1 persona</option>
         <option value="2">2 persone</option>
@@ -1183,10 +1193,16 @@ async function loadGallery(reset = false) {
 function appendGalleryItem(data, idx) {
   const div = document.createElement('div');
   div.className = 'gallery-item';
-  div.innerHTML = `
-    <img src="${data.thumb_url}" alt="Foto di ${data.name}" loading="lazy" />
-    <div class="gallery-item-name">${data.name}</div>
-  `;
+  const img = document.createElement('img');
+  img.src = data.thumb_url;
+  img.alt = `Foto di ${data.name}`;
+  img.loading = 'lazy';
+  img.onerror = () => div.remove(); /* nasconde foto con immagine mancante */
+  const label = document.createElement('div');
+  label.className = 'gallery-item-name';
+  label.textContent = data.name;
+  div.appendChild(img);
+  div.appendChild(label);
   div.addEventListener('click', () => openLightbox(idx));
   galleryGrid.appendChild(div);
 }
