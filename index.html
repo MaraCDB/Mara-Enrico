@@ -702,20 +702,12 @@ footer .footer-date{
 
     <div class="countdown" id="countdown">
       <div class="countdown-item">
-        <div class="countdown-num" id="cd-days">---</div>
+        <div class="countdown-num" id="cd-months">--</div>
+        <div class="countdown-label">Mesi</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-num" id="cd-days">--</div>
         <div class="countdown-label">Giorni</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-num" id="cd-hours">--</div>
-        <div class="countdown-label">Ore</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-num" id="cd-mins">--</div>
-        <div class="countdown-label">Minuti</div>
-      </div>
-      <div class="countdown-item">
-        <div class="countdown-num" id="cd-secs">--</div>
-        <div class="countdown-label">Secondi</div>
       </div>
     </div>
 
@@ -938,29 +930,29 @@ window.addEventListener('scroll', () => {
 
 /* ── Countdown ──────────────────────────── */
 function updateCountdown() {
-  const wedding = new Date('2026-09-26T11:30:00+02:00');
+  const weddingYear = 2026, weddingMonth = 8, weddingDay = 26; // mese 0-based: 8 = settembre
   const now = new Date();
-  const diff = wedding - now;
+  const wedding = new Date(weddingYear, weddingMonth, weddingDay);
 
-  if (diff <= 0) {
+  if (now >= wedding) {
     document.getElementById('countdown').innerHTML =
       '<p class="hero-subtitle">Oggi è il grande giorno!</p>';
     return;
   }
 
-  const days  = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const mins  = Math.floor((diff % 3600000) / 60000);
-  const secs  = Math.floor((diff % 60000) / 1000);
+  let months = (weddingYear - now.getFullYear()) * 12 + (weddingMonth - now.getMonth());
+  let days = weddingDay - now.getDate();
+  if (days < 0) {
+    months--;
+    const prevMonth = new Date(weddingYear, weddingMonth, 0);
+    days += prevMonth.getDate();
+  }
 
-  document.getElementById('cd-days').textContent  = days;
-  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-  document.getElementById('cd-mins').textContent  = String(mins).padStart(2, '0');
-  document.getElementById('cd-secs').textContent  = String(secs).padStart(2, '0');
+  document.getElementById('cd-months').textContent = months;
+  document.getElementById('cd-days').textContent = days;
 }
 
 updateCountdown();
-setInterval(updateCountdown, 1000);
 
 /* ── Scroll fade-in ─────────────────────── */
 const observer = new IntersectionObserver((entries) => {
