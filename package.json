@@ -1,0 +1,7 @@
+{
+  "name": "mara-enrico-wedding",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve . -p 5500"
+  }
+}
