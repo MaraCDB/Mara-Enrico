@@ -1006,16 +1006,38 @@ function handleRsvp(e) {
 }
 </script>
 
-<!-- ═══════════════ SUPABASE & FOTO ═══════════════ -->
+<!-- ═══════════════ FIRESTORE + CLOUDINARY & FOTO ═══════════════ -->
 <script type="module">
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, query, orderBy,
+  limit, startAfter, getDocs, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-const SUPABASE_URL  = 'https://pkzwupxmggjoijituvwm.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrend1cHhtZ2dqb2lqaXR1dndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1OTUzODgsImV4cCI6MjA4OTE3MTM4OH0.P0WGLJVB1fX4odxne09ObNru3TQeVefE3KzqQ9zskz4';
+const firebaseConfig = {
+  apiKey: "AIzaSyAV3HbzJRdKwgpwEs3YzcnH39DGui5Rijc",
+  authDomain: "mara-enrico-wedding.firebaseapp.com",
+  projectId: "mara-enrico-wedding",
+  storageBucket: "mara-enrico-wedding.firebasestorage.app",
+  messagingSenderId: "392174455170",
+  appId: "1:392174455170:web:fd0b5db72f19b8a39fe79b"
+};
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
 
-/* ── Compressione immagini (Canvas API) ─────── */
+const CLOUDINARY_CLOUD  = 'dwxunp63a';
+const CLOUDINARY_PRESET = 'wedding_photos';
+const CLOUDINARY_FOLDER = 'wedding';
+const BATCH = 20;
+
+/* ── URL builder ───────────────────────────── */
+const buildUrl = (publicId, format, transform) =>
+  `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/${transform}/${publicId}.${format}`;
+const thumbUrl = (p) => buildUrl(p.public_id, p.format, 'w_400,h_400,c_fill,q_auto,f_auto');
+const fullUrl  = (p) => buildUrl(p.public_id, p.format, 'q_auto,f_auto');
+
+/* ── Compressione leggera (Canvas API) ─────── */
 function compressImage(file, maxDim, quality) {
   return new Promise(resolve => {
     const img = new Image();
@@ -1084,43 +1106,33 @@ async function handleFiles(fileList) {
     try {
       uploadStatus.textContent = `Caricamento ${done + 1} di ${files.length}…`;
 
-      /* Comprimi: full-size max 1920px, thumbnail 400px */
-      const full  = await compressImage(file, 1920, 0.8);
-      const thumb = await compressImage(file, 400, 0.7);
+      // Compressione leggera: max 2400px, q=0.9 (alta qualità preservata)
+      const { blob } = await compressImage(file, 2400, 0.9);
 
-      const ts   = Date.now();
-      const uid  = Math.random().toString(36).substring(2, 8);
-      const name = `${ts}_${uid}.jpg`;
+      // Upload diretto a Cloudinary (unsigned preset)
+      const fd = new FormData();
+      fd.append('file', blob);
+      fd.append('upload_preset', CLOUDINARY_PRESET);
+      fd.append('folder', CLOUDINARY_FOLDER);
 
-      /* Upload full-size su Supabase Storage */
-      const { error: fullErr } = await supabase.storage
-        .from('photos')
-        .upload(`full/${name}`, full.blob, { contentType: 'image/jpeg' });
-      if (fullErr) throw fullErr;
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`,
+        { method: 'POST', body: fd }
+      );
+      if (!res.ok) throw new Error(`Cloudinary upload failed: ${res.status}`);
+      const cl = await res.json();
 
-      /* Upload thumbnail */
-      const { error: thumbErr } = await supabase.storage
-        .from('photos')
-        .upload(`thumbs/${name}`, thumb.blob, { contentType: 'image/jpeg' });
-      if (thumbErr) throw thumbErr;
-
-      /* URL pubblici */
-      const { data: fullData }  = supabase.storage.from('photos').getPublicUrl(`full/${name}`);
-      const { data: thumbData } = supabase.storage.from('photos').getPublicUrl(`thumbs/${name}`);
-
-      /* Salva metadata nella tabella photos */
-      const { error: dbErr } = await supabase.from('photos').insert({
-        url:        fullData.publicUrl,
-        thumb_url:  thumbData.publicUrl,
+      // Metadata su Firestore
+      await addDoc(collection(db, 'photos'), {
+        public_id:  cl.public_id,
+        format:     cl.format,
+        width:      cl.width,
+        height:     cl.height,
         name:       uploaderName,
-        width:      full.width,
-        height:     full.height
+        created_at: serverTimestamp()
       });
-      if (dbErr) throw dbErr;
 
       done++;
-
-      /* Aggiorna progress */
       const overall = Math.round((done / files.length) * 100);
       uploadBar.style.width = overall + '%';
       uploadText.textContent = overall + '%';
@@ -1144,39 +1156,40 @@ async function handleFiles(fileList) {
 }
 
 /* ── Galleria ──────────────────────────────── */
-const BATCH = 20;
-let offset    = 0;
+let lastDoc   = null;
 let allPhotos = [];
 
 async function loadGallery(reset = false) {
   if (reset) {
-    offset = 0;
+    lastDoc = null;
     allPhotos = [];
     galleryGrid.innerHTML = '';
   }
 
   try {
-    const { data, error } = await supabase
-      .from('photos')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .range(offset, offset + BATCH - 1);
+    let q = query(
+      collection(db, 'photos'),
+      orderBy('created_at', 'desc'),
+      limit(BATCH)
+    );
+    if (lastDoc) q = query(q, startAfter(lastDoc));
 
-    if (error) throw error;
+    const snap = await getDocs(q);
 
-    if ((!data || data.length === 0) && allPhotos.length === 0) {
+    if (snap.empty && allPhotos.length === 0) {
       galleryGrid.innerHTML = '<p class="gallery-empty">Nessuna foto ancora. Sii il primo a caricare!</p>';
       loadMoreBtn.style.display = 'none';
       return;
     }
 
-    data.forEach(photo => {
+    snap.docs.forEach(docSnap => {
+      const photo = { id: docSnap.id, ...docSnap.data() };
       allPhotos.push(photo);
       appendGalleryItem(photo, allPhotos.length - 1);
     });
 
-    offset += data.length;
-    loadMoreBtn.style.display = data.length < BATCH ? 'none' : 'inline-block';
+    lastDoc = snap.docs[snap.docs.length - 1] || lastDoc;
+    loadMoreBtn.style.display = snap.size < BATCH ? 'none' : 'inline-block';
   } catch (err) {
     console.error('Gallery load error:', err);
   }
@@ -1186,10 +1199,10 @@ function appendGalleryItem(data, idx) {
   const div = document.createElement('div');
   div.className = 'gallery-item';
   const img = document.createElement('img');
-  img.src = data.thumb_url;
+  img.src = thumbUrl(data);
   img.alt = `Foto di ${data.name}`;
   img.loading = 'lazy';
-  img.onerror = () => div.remove(); /* nasconde foto con immagine mancante */
+  img.onerror = () => div.remove();
   const label = document.createElement('div');
   label.className = 'gallery-item-name';
   label.textContent = data.name;
@@ -1204,7 +1217,7 @@ loadMoreBtn.addEventListener('click', () => loadGallery(false));
 /* ── Lightbox ──────────────────────────────── */
 function openLightbox(idx) {
   const p = allPhotos[idx];
-  lightboxImg.src = p.url;
+  lightboxImg.src = fullUrl(p);
   lightboxCaption.textContent = `Foto di ${p.name}`;
   lightbox.style.display = 'flex';
   document.body.style.overflow = 'hidden';
