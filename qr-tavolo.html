@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<title>Card Tavolo — Mara &amp; Enrico</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --green:#6b8f71;
+  --green-dark:#4a6b50;
+  --green-light:#e8f0e9;
+  --cream:#faf9f6;
+  --cream-dark:#f0eeea;
+  --text:#3a3a3a;
+  --text-light:#6a6a6a;
+  --gold:#c4a265;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+@page{
+  size:A4 landscape;
+  margin:0;
+}
+
+html,body{height:100%}
+
+body{
+  font-family:'Montserrat',sans-serif;
+  font-weight:300;
+  color:var(--text);
+  background:#e5e5e5;
+  -webkit-font-smoothing:antialiased;
+  padding:20px 0;
+}
+
+.hint{
+  max-width:297mm;
+  margin:0 auto 14px;
+  padding:10px 16px;
+  background:#fff;
+  border-left:3px solid var(--gold);
+  font-size:13px;
+  color:var(--text-light);
+  font-family:'Montserrat',sans-serif;
+}
+.hint b{color:var(--text);font-weight:500}
+
+.sheet{
+  width:297mm;
+  height:210mm;
+  background:var(--cream);
+  margin:0 auto;
+  display:flex;
+  flex-direction:row;
+  position:relative;
+  box-shadow:0 4px 30px rgba(0,0,0,.12);
+}
+
+.card{
+  flex:1;
+  padding:14mm 16mm;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+}
+
+.card::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  bottom:12mm;
+  transform:translateX(-50%);
+  width:38mm;
+  height:1px;
+  background:var(--gold);
+  opacity:.7;
+}
+
+.ring-photo{
+  width:38mm;
+  height:38mm;
+  border-radius:50%;
+  object-fit:cover;
+  border:1.2mm solid #fff;
+  box-shadow:0 2mm 5mm rgba(0,0,0,.12);
+  margin-bottom:5mm;
+}
+
+.date{
+  font-family:'Montserrat',sans-serif;
+  font-size:9.5pt;
+  font-weight:500;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:6mm;
+}
+
+.names{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;
+  color:var(--green-dark);
+  line-height:1.05;
+  margin-bottom:7mm;
+}
+
+.names .line{
+  display:block;
+  font-size:42pt;
+}
+
+.names .amp{
+  display:block;
+  font-size:21pt;
+  color:var(--gold);
+  margin:1mm 0;
+  line-height:1;
+}
+
+.invite{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:15pt;
+  font-weight:300;
+  color:var(--text);
+  line-height:1.4;
+  max-width:115mm;
+  margin-bottom:6mm;
+}
+
+.qr-wrap{
+  width:28mm;
+  height:28mm;
+  background:#fff;
+  padding:1.5mm;
+  border:1px solid var(--green-light);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:4mm;
+}
+.qr-wrap img{width:100%;height:100%;display:block;image-rendering:pixelated}
+
+.instructions{
+  font-family:'Montserrat',sans-serif;
+  font-size:8pt;
+  font-weight:500;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--green-dark);
+  margin-bottom:2.5mm;
+}
+
+.url-text{
+  font-family:'Montserrat',sans-serif;
+  font-size:7.5pt;
+  font-weight:300;
+  color:var(--text-light);
+  letter-spacing:.08em;
+}
+
+.cut-line{
+  position:absolute;
+  top:8mm;bottom:8mm;
+  left:50%;
+  border-left:1px dashed #b8b8b8;
+  pointer-events:none;
+}
+
+@media print{
+  body{background:#fff;padding:0}
+  .hint{display:none}
+  .sheet{margin:0;box-shadow:none}
+}
+</style>
+</head>
+<body>
+
+<div class="hint">
+  <b>Anteprima.</b> Stampa con <b>Ctrl + P</b> → orientamento <b>orizzontale</b> →
+  "Più impostazioni" → <b>Margini: Nessuno</b> → taglia lungo la linea tratteggiata per ottenere 2 card.
+</div>
+
+<div class="sheet">
+
+  <div class="card">
+    <img src="foto.jpg" class="ring-photo" alt="" />
+    <div class="date">26 Settembre 2026</div>
+    <h1 class="names">
+      <span class="line">Mara</span>
+      <span class="amp">&amp;</span>
+      <span class="line">Enrico</span>
+    </h1>
+    <div class="invite">
+      Aiutaci a raccogliere i ricordi<br />
+      del nostro giorno speciale
+    </div>
+    <div class="qr-wrap"></div>
+    <div class="instructions">Carica le tue foto</div>
+    <div class="url-text">maracdb.github.io/Mara-Enrico</div>
+  </div>
+
+  <div class="cut-line"></div>
+
+  <div class="card">
+    <img src="foto.jpg" class="ring-photo" alt="" />
+    <div class="date">26 Settembre 2026</div>
+    <h1 class="names">
+      <span class="line">Mara</span>
+      <span class="amp">&amp;</span>
+      <span class="line">Enrico</span>
+    </h1>
+    <div class="invite">
+      Aiutaci a raccogliere i ricordi<br />
+      del nostro giorno speciale
+    </div>
+    <div class="qr-wrap"></div>
+    <div class="instructions">Carica le tue foto</div>
+    <div class="url-text">maracdb.github.io/Mara-Enrico</div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script>
+  const url = 'https://maracdb.github.io/Mara-Enrico/#foto';
+  const qr = qrcode(0, 'M');
+  qr.addData(url);
+  qr.make();
+  const imgTag = qr.createImgTag(6, 0);
+  document.querySelectorAll('.qr-wrap').forEach(w => {
+    w.innerHTML = imgTag;
+  });
+</script>
+
+</body>
+</html>
