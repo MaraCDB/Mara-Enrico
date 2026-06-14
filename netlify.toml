@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/*"
+  to = "https://maracdb.github.io/Mara-Enrico/:splat"
+  status = 301
+  force = true
